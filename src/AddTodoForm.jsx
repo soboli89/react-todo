@@ -9,7 +9,7 @@ function AddTodoForm (){
     return(
         <div>
             <form>
-                <label for="todoTitle">Title</label><br/>
+                <label htmlFor="todoTitle">Title</label><br/>
                 <input id="todoTitle" type="text"></input><br/>
                 <input type="submit"></input>
             </form>
