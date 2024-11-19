@@ -26,21 +26,14 @@ const list =[
     }
   ]
 
-function TodoList()
-{
+function TodoList() {
     return (
-        <div>
-            <ul>
-                {list.map(function (item) {
-                    return <li key={item.id}>{item.name}</li>
-                }
-      )}
-      </ul>
-
-        </div>
-    )
-
-    
+        <ul>
+            {list.map((item)=> {
+              return <li key={item.id}>{item.name}</li>
+            })}
+        </ul>
+    )   
 };
 
 

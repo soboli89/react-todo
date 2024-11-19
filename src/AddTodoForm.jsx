@@ -7,13 +7,11 @@ import './App.css'
 
 function AddTodoForm (){
     return(
-        <div>
             <form>
                 <label htmlFor="todoTitle">Title</label><br/>
                 <input id="todoTitle" type="text"></input><br/>
                 <input type="submit"></input>
             </form>
-        </div>
     )
 };
 
