@@ -5,9 +5,10 @@ import './App.css'
 import TodoListItem from './TodoListItem'
 
 const TodoList = (props) => {
+  console.log("todo="+props);
   return (
       <ul>
-        {props.items.map((item)=> (
+        {props.todoList.map((item)=> (
           <TodoListItem key={item.id} item={item}/>
         ))}
       </ul>

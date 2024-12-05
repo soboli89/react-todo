@@ -6,7 +6,9 @@ import TodoList from './TodoList'
 import AddTodoForm from './AddTodoForm'
 
 function App() {
-  const [list, setNewTodo] = useState([
+  const [todoList, setTodoList] = useState([]);
+  const [list, setNewTodo] = useState([]);
+  /*
       {
         id: 1,
         name : 'create an agreement with utility companies',
@@ -23,17 +25,18 @@ function App() {
         id: 4,
         name : 'Set up an appointment to connest the internet',
       }
-  ]);
+  ]);*/
  
   const handleAddTodo = (newTodo) => {
-    setNewTodo([newTodo, ...list]);
+    setTodoList([newTodo, ...list]);
   };
+  console.log("todo list="+todoList);
 
   return (
     <div>
    <h1>Todo List</h1>
       <AddTodoForm onAddTodo={handleAddTodo}/>
-      <TodoList items={list}/>
+      <TodoList /*items={list}*/ todoList={todoList}/>
    </div>
   )
 }
