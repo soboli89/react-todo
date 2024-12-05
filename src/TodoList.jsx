@@ -5,7 +5,6 @@ import './App.css'
 import TodoListItem from './TodoListItem'
 
 const TodoList = (props) => {
-  console.log("todo="+props);
   return (
       <ul>
         {props.todoList.map((item)=> (
