@@ -6,7 +6,7 @@ import TodoList from './TodoList'
 import AddTodoForm from './AddTodoForm'
 
 function App() {
-  const [list, setNewList] = useState([
+  const [list, setList] = useState([
       {
         id: 1,
         name : 'create an agreement with utility companies',
@@ -26,7 +26,7 @@ function App() {
   ]);
  
   const handleAddTodo = (newTodo) => {
-    setNewList([newTodo, ...list]);
+    setList([newTodo, ...list]);
   };
 
   return (
