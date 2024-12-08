@@ -3,15 +3,30 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-
-
-function AddTodoForm (){
+function AddTodoForm ({ onAddTodo }){
+    const [todoTitle, setTodoTitle] = useState('');
+    const handleAddTodo = (e) =>{
+        e.preventDefault();
+        onAddTodo({id: Date.now(), name: todoTitle});
+        setTodoTitle('');
+    }
+    const handleChange =(e) => {
+        const setTodoItem = e.target.value;
+        setTodoTitle(setTodoItem);
+    }
     return(
-            <form>
-                <label htmlFor="todoTitle">Title</label><br/>
-                <input id="todoTitle" type="text"></input><br/>
-                <input type="submit"></input>
-            </form>
+        <form onSubmit={handleAddTodo}>
+            <label htmlFor="todoTitle" >Title</label><br/>
+            <input 
+                name="item" 
+                id="todoTitle" 
+                type="text" 
+                value={todoTitle}
+                onChange={handleChange}
+            />
+            <br/>
+            <input type="submit" ></input>
+        </form>
     )
 };
 
