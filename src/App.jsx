@@ -6,10 +6,10 @@ import TodoList from './TodoList'
 import AddTodoForm from './AddTodoForm'
 
 function App() {
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setList] = useState([]);
  
   const handleAddTodo = (newTodo) => {
-    setList([newTodo, ...list]);
+    setList([newTodo, ...todoList]);
   };
   return (
     <div>
