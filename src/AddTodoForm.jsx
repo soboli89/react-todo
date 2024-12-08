@@ -4,15 +4,15 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function AddTodoForm ({ onAddTodo }){
-    const [newTodoTitle, setNewTodo] = useState('');
+    const [todoTitle, setTodoTitle] = useState('');
     const handleAddTodo = (e) =>{
         e.preventDefault();
-        onAddTodo({id: Date.now(), name: newTodoTitle});
-        setNewTodo('');
+        onAddTodo({id: Date.now(), name: todoTitle});
+        setTodoTitle('');
     }
     const handleChange =(e) => {
-        const setNewTodoItem = e.target.value;
-        setNewTodo(setNewTodoItem);
+        const setTodoItem = e.target.value;
+        setTodoTitle(setTodoItem);
     }
     return(
         <form onSubmit={handleAddTodo}>
@@ -21,7 +21,7 @@ function AddTodoForm ({ onAddTodo }){
                 name="item" 
                 id="todoTitle" 
                 type="text" 
-                value={newTodoTitle}
+                value={todoTitle}
                 onChange={handleChange}
             />
             <br/>
