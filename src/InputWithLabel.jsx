@@ -1,17 +1,22 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useRef } from "react";
+import Button from "./Button";
 
-function InputWithLabel ({id, setValues }) {
-
+function InputWithLabel ({id, setValues, children }) {
+    const inputRef = useRef();
+    useEffect(()=> {
+        inputRef.current.focus();
+    })
     return (   
         <Fragment>
-            <label htmlFor="todoTitle" >Title</label><br/>
+            <label htmlFor="todoTitle" >{children}</label><br/>
             <input 
                 id={id} 
                 type="text" 
                 onChange={setValues}
+                ref={inputRef}
             />
             <br/>
-            <input type="submit" ></input>
+            <Button type="submit" label="Add"></Button>
             </Fragment>
     )
 }

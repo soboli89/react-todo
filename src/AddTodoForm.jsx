@@ -1,11 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import InputWithLabel from './InputWithLabel'
+import Button from './Button'
 
 function AddTodoForm ({ addTodo }){
     const [todoTitle, setTodoTitle] = useState({});
+   
     
     const handleAddTodo = (e) =>{
         e.preventDefault();
@@ -19,7 +21,7 @@ function AddTodoForm ({ addTodo }){
         }
     return(
         <form onSubmit={handleAddTodo}>
-            <InputWithLabel todoTitle={todoTitle} setValues={handleChange} />
+            <InputWithLabel todoTitle={todoTitle} setValues={handleChange} >Title</InputWithLabel> 
         </form>
     )
 };
