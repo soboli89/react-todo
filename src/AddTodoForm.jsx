@@ -1,6 +1,4 @@
 import { useEffect, useState, useRef } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import InputWithLabel from './InputWithLabel'
 import Button from './Button'
@@ -14,14 +12,14 @@ function AddTodoForm ({ addTodo }){
         addTodo({id: Date.now(), name: todoTitle});
         setTodoTitle('');
     }
-    const handleChange =(e) => {
+    const handleTitleChange =(e) => {
         e.preventDefault();
         const setTodoItem = e.target.value;
         setTodoTitle(setTodoItem);
         }
     return(
         <form onSubmit={handleAddTodo}>
-            <InputWithLabel todoTitle={todoTitle} setValues={handleChange} >Title</InputWithLabel> 
+            <InputWithLabel todoTitle={todoTitle} onTitleChange={handleTitleChange} >Title</InputWithLabel> 
         </form>
     )
 };
