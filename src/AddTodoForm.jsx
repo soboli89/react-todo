@@ -1,34 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState, useRef } from 'react'
 import './App.css'
+import InputWithLabel from './InputWithLabel'
+import Button from './Button'
 
 function AddTodoForm ({ addTodo }){
     const [todoTitle, setTodoTitle] = useState('');
-    
+   
     
     const handleAddTodo = (e) =>{
+        if (todoTitle.trim()){
         e.preventDefault();
         addTodo({id: Date.now(), name: todoTitle});
         setTodoTitle('');
+        }
     }
-    const handleChange =(e) => {
+
+    const handleTitleChange =(e) => {
         e.preventDefault();
-        const setTodoItem = e.target.value;
-        setTodoTitle(setTodoItem);
-    }
+        setTodoTitle(e.target.value);
+        }
     return(
         <form onSubmit={handleAddTodo}>
-            <label htmlFor="todoTitle" >Title</label><br/>
-            <input 
-                name="item" 
-                id="todoTitle" 
-                type="text" 
-                value={todoTitle}
-                onChange={handleChange}
-            />
-            <br/>
-            <input type="submit" ></input>
+            <InputWithLabel 
+                onTitleChange={handleTitleChange} 
+                value={todoTitle} 
+            >
+                Title
+            </InputWithLabel> 
         </form>
     )
 };
