@@ -4,22 +4,29 @@ import InputWithLabel from './InputWithLabel'
 import Button from './Button'
 
 function AddTodoForm ({ addTodo }){
-    const [todoTitle, setTodoTitle] = useState({});
+    const [todoTitle, setTodoTitle] = useState('');
    
     
     const handleAddTodo = (e) =>{
+        if (todoTitle.trim()){
         e.preventDefault();
         addTodo({id: Date.now(), name: todoTitle});
         setTodoTitle('');
+        }
     }
+
     const handleTitleChange =(e) => {
         e.preventDefault();
-        const setTodoItem = e.target.value;
-        setTodoTitle(setTodoItem);
+        setTodoTitle(e.target.value);
         }
     return(
         <form onSubmit={handleAddTodo}>
-            <InputWithLabel todoTitle={todoTitle} onTitleChange={handleTitleChange} >Title</InputWithLabel> 
+            <InputWithLabel 
+                onTitleChange={handleTitleChange} 
+                value={todoTitle} 
+            >
+                Title
+            </InputWithLabel> 
         </form>
     )
 };
