@@ -1,12 +1,12 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Button from './Button'
 
 
-function TodoListItem (props) {
+function TodoListItem ({item, onRemove}) {
     return (
-        <li>{props.item.name}</li>
+        <li>{item.name}
+            <Button label="Delete" onClick={()=>onRemove(item)}></Button>
+        </li>
     )
 }
 
