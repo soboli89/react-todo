@@ -16,11 +16,11 @@ function AddTodoForm ({ addTodo }){
     }
 
     const handleTitleChange =(e) => {
-        e.preventDefault();
         setTodoTitle(e.target.value);
         }
     return(
         <form onSubmit={handleAddTodo}>
+
             <InputWithLabel 
                 onTitleChange={handleTitleChange} 
                 value={todoTitle} 
