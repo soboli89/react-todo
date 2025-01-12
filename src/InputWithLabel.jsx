@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useRef } from "react";
 import Button from "./Button";
 
-function InputWithLabel ({id, onTitleChange, children }) {
+function InputWithLabel ({id, onTitleChange, value, children }) {
     const inputRef = useRef();
     useEffect(()=> {
         inputRef.current.focus();
@@ -12,12 +12,13 @@ function InputWithLabel ({id, onTitleChange, children }) {
             <input 
                 id={id} 
                 type="text" 
+                value={value}
                 onChange={onTitleChange}
                 ref={inputRef}
             />
             <br/>
             <Button type="submit" label="Add"></Button>
-            </Fragment>
+        </Fragment>
     )
 }
 
