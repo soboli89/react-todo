@@ -13,6 +13,7 @@ function AddTodoForm ({ addTodo }){
             setTodoTitle('');
         }
     }
+
     const handleTitleChange =(e) => {
         setTodoTitle(e.target.value);
         }
@@ -22,7 +23,7 @@ function AddTodoForm ({ addTodo }){
                 value={todoTitle} 
                 onTitleChange={handleTitleChange} 
             > 
-                Title
+                  Title
             </InputWithLabel> 
         </form>
     )
