@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useRef } from "react";
 import Button from "./Button";
 import TodoList from "./TodoList";
 
-
 function InputWithLabel ({id, onTitleChange, value, children }) {
     const inputRef = useRef();
     useEffect(()=> {

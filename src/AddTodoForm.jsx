@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import './App.css'
 import InputWithLabel from './InputWithLabel'
-import Button from './Button'
 
 function AddTodoForm ({ addTodo }){
     const [todoTitle, setTodoTitle] = useState('');
@@ -9,9 +8,9 @@ function AddTodoForm ({ addTodo }){
     
     const handleAddTodo = (e) =>{
         if (todoTitle.trim()){
-        e.preventDefault();
-        addTodo({id: Date.now(), name: todoTitle});
-        setTodoTitle('');
+            e.preventDefault();
+            addTodo({id: Date.now(), name: todoTitle});
+            setTodoTitle('');
         }
     }
 
@@ -20,12 +19,11 @@ function AddTodoForm ({ addTodo }){
         }
     return(
         <form onSubmit={handleAddTodo}>
-
             <InputWithLabel 
-                onTitleChange={handleTitleChange} 
                 value={todoTitle} 
-            >
-                Title
+                onTitleChange={handleTitleChange} 
+            > 
+                  Title
             </InputWithLabel> 
         </form>
     )
