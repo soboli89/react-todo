@@ -1,5 +1,5 @@
-import './App.css'
-import TodoListItem from './TodoListItem'
+import './App/App.css'
+import TodoListItem from './TodoListItem/TodoListItem'
 
 const TodoList = ({todoList, onRemove}) => {
   return (

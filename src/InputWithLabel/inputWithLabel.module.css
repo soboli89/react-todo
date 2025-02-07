@@ -41,7 +41,11 @@
     color: aliceblue;
 }
 
-
+.label{
+    color: blue;
+    font-size: 30px;
+    font-weight: bold
+}
 @media(max-width: 576px){
     .inputButton {
         background-color: white;

@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
-import './App.css'
-import InputWithLabel from './InputWithLabel'
+
+import InputWithLabel from './InputWithLabel/InputWithLabel'
 
 function AddTodoForm ({ addTodo }){
     const [todoTitle, setTodoTitle] = useState('');
