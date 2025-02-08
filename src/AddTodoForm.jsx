@@ -4,8 +4,6 @@ import InputWithLabel from './InputWithLabel/InputWithLabel'
 
 function AddTodoForm ({ addTodo }){
     const [todoTitle, setTodoTitle] = useState('');
-   
-    
     const handleAddTodo = (e) =>{
         if (todoTitle.trim()){
             e.preventDefault();

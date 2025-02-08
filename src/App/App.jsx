@@ -10,39 +10,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [todoList, setTodoList] = useState([]);
   const URL = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}`;
-  const handleRemove = (item) => {
-    const removedId = item.id;
-    const deleteData = async()=> {
-      const options = {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`,
-        }
-      }     
-      try {
-        const response = await fetch(`${URL}/${removedId}`, options);
-        if (!response.ok) {
-          const message = `Error: ${response.status}`;
-          console.log(message);
-        }
-        const data = await response.json();
-        if(data.id) {
-          const updateTodolist = todoList.filter((todo)=> todo.id !== data.id);
-          setTodoList(updateTodolist);
-        }
-      } catch (error){
-        console.error('Error:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    setIsLoading(true);
-    deleteData();
-   
-  }
- 
-
-  useEffect(() => {
+  
+ useEffect(() => {
     const fetchData = async()=> {
       const options = {
         method: 'GET',
@@ -70,6 +39,9 @@ function App() {
       }
     }
     fetchData();
+
+
+    
   }, []);   
 
   const handleAddTodo = (newTodo) => {
@@ -108,12 +80,43 @@ function App() {
     };
       postData();
     };
+
+    const handleRemove = (item) => {
+      const removedId = item.id;
+      const deleteData = async()=> {
+        const options = {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`,
+          }
+        }     
+        try {
+          const response = await fetch(`${URL}/${removedId}`, options);
+          if (!response.ok) {
+            const message = `Error: ${response.status}`;
+            console.log(message);
+          }
+          const data = await response.json();
+          if(data.id) {
+            const updateTodolist = todoList.filter((todo)=> todo.id !== data.id);
+            setTodoList(updateTodolist);
+          }
+        } catch (error){
+          console.error('Error:', error);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+      setIsLoading(true);
+      deleteData();
+     
+    }
     return (
       <BrowserRouter>
         <Routes>
           <Route path='/'
             element={
-              <div>
+              <>
                 <h1>Todo List</h1>
                   <AddTodoForm addTodo={handleAddTodo}/>
                   {isLoading ? (
@@ -121,7 +124,7 @@ function App() {
                   ) : (
                     <TodoList todoList={todoList} onRemove={handleRemove}/>
                   )}
-              </div>
+              </>
             }
           /> 
           <Route path ='/new'
