@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useRef } from "react";
-import Button from "./Button";
+import Button from "../Button";
+import styleInput from "./inputWithLabel.module.css"
 
 function InputWithLabel ({id, onTitleChange, value, children }) {
     const inputRef = useRef();
@@ -7,9 +8,9 @@ function InputWithLabel ({id, onTitleChange, value, children }) {
         inputRef.current.focus();
     }, []);
     return (   
-        <Fragment>
-            <label htmlFor="todoTitle" >{children}</label><br/>
-            <input 
+        <Fragment >
+            <label className={styleInput.label} htmlFor="todoTitle" >{children}</label>
+            <input className={styleInput.input}
                 id={id} 
                 type="text" 
                 value={value}
@@ -17,7 +18,7 @@ function InputWithLabel ({id, onTitleChange, value, children }) {
                 ref={inputRef}
             />
             <br/>
-            <Button type="submit" label="Add"></Button>
+            <Button className={styleInput.inputButton} type="submit" label="Add"></Button>
         </Fragment>
     )
 }
