@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useRef } from "react";
-import Button from "../Button";
+import Button from "../../Button";
 import styleInput from "./inputWithLabel.module.css"
+import PropTypes from "prop-types";
 
 function InputWithLabel ({id, onTitleChange, value, children }) {
     const inputRef = useRef();
@@ -22,5 +23,12 @@ function InputWithLabel ({id, onTitleChange, value, children }) {
         </Fragment>
     )
 }
+
+InputWithLabel.propTypes = {
+    id: PropTypes.string,
+    onTitleChange: PropTypes.func,
+    value: PropTypes.string,
+    children: PropTypes.node
+  };
 
 export default InputWithLabel;
