@@ -9,7 +9,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [todoList, setTodoList] = useState([]);
-  const URL = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}`;
+  const [sortOrder, setSortOrder] = useState("asc");
+  const URL = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME
+}`;
   
  useEffect(() => {
     const fetchData = async()=> {
@@ -20,7 +22,7 @@ function App() {
         }
       }   
       try {
-        const response = await fetch(URL, options);
+        const response = await fetch(`${URL}?view=Grid%20view&sort[0][field]=title&sort[0][direction]=asc`, options);
         if (!response.ok) {
           const message = `Error: ${response.status}`;
           console.log(message);
@@ -39,10 +41,34 @@ function App() {
       }
     }
     fetchData();
-
-
     
   }, []);   
+
+
+  const sortTodoList = (todos, order) => {
+    return [...todos].sort((a, b) => {
+      if (a.title && b.title) {
+        if (order === 'asc') {
+          if (a.title < b.title) {
+            return -1;
+          } else if (a.title > b.title) {
+            return 1;
+          } else {
+            return 0;
+          }
+        } else {
+          if (a.title < b.title) {
+            return 1;
+          } else if (a.title > b.title) {
+            return -1;
+          } else {
+            return 0;
+          }
+        }
+      }
+      return 0;
+    });
+  };  
 
   const handleAddTodo = (newTodo) => {
     const newTodoItem = {
@@ -111,6 +137,13 @@ function App() {
       deleteData();
      
     }
+
+    const toggleSort = () =>
+      setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"),
+    );
+    
+    const sortedTodoList = sortTodoList(todoList, sortOrder);
+
     return (
       <BrowserRouter>
         <Routes>
@@ -119,10 +152,13 @@ function App() {
               <>
                 <h1>Todo List</h1>
                   <AddTodoForm addTodo={handleAddTodo}/>
+                  <button onClick={toggleSort}>
+                    Sort by name {sortOrder === "asc" ? "\u2193" : "\u2191"}
+                  </button>
                   {isLoading ? (
                     <p>Loading...</p>
                   ) : (
-                    <TodoList todoList={todoList} onRemove={handleRemove}/>
+                    <TodoList todoList={sortedTodoList} onRemove={handleRemove}/>
                   )}
               </>
             }
@@ -132,14 +168,10 @@ function App() {
               <h1>New Todo List</h1>
             }
           />
-
         </Routes>
       </BrowserRouter>
   )
 }
-
-
-
 
 
 export default App
