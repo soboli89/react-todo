@@ -3,7 +3,7 @@ import './App'
 import TodoList from '../TodoList'
 import AddTodoForm from '../AddTodoForm'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 
 
 function App() {
@@ -28,9 +28,11 @@ function App() {
           console.log(message);
         }
         const data = await response.json();
+        console.log("data="+data);
         const todos = data.records.map((todo) =>({
           id: todo.id,
           title: todo.fields.title,  
+          completedAt: todo.fields.completedAt,
         }));
         setTodoList(todos);
 
@@ -74,6 +76,7 @@ function App() {
     const newTodoItem = {
       fields: {
         title:  newTodo.name,
+        completedAt: false
       } 
     }
     const postData = async () => {
@@ -144,10 +147,45 @@ function App() {
     
     const sortedTodoList = sortTodoList(todoList, sortOrder);
 
-    return (
+      // Функция для обновления completedAt в Airtable
+  const toggleCompletedAt = async (todo) => {
+    const updatedTodo = {
+      fields: {
+        completedAt: !todo.completedAt, // Переключаем значение completedAt
+      }
+    };
+
+    const options = {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedTodo),
+    };
+
+    try {
+      const response = await fetch(`${URL}/${todo.id}`, options);
+      if (!response.ok) {
+        console.error('Error updating task:', response.status);
+        return;
+      }
+
+      const updatedData = await response.json();
+      console.log('Task updated:', updatedData);
+
+      setTodoList(prevList => prevList.map(t => 
+        t.id === todo.id ? { ...t, completedAt: updatedData.fields.completedAt } : t
+      ));
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+       return (
       <BrowserRouter>
         <Routes>
           <Route path='/'
+          
             element={
               <>
                 <h1>Todo List</h1>
@@ -158,16 +196,26 @@ function App() {
                   {isLoading ? (
                     <p>Loading...</p>
                   ) : (
-                    <TodoList todoList={sortedTodoList} onRemove={handleRemove}/>
+                    <TodoList todoList={sortedTodoList} onToggleCompletedAt={toggleCompletedAt} onRemove={handleRemove}/>
                   )}
+                 <Link to="/new" style={{ textDecoration: 'none' }}>
+                  <button>Go to new list</button>
+    </Link>
               </>
             }
           /> 
           <Route path ='/new'
             element ={
+            <>
               <h1>New Todo List</h1>
+              <Link to="/" style={{ textDecoration: 'none' }}>
+                <button>Go to Home</button>
+              </Link>
+            </>
             }
+            
           />
+          
         </Routes>
       </BrowserRouter>
   )

@@ -3,11 +3,12 @@ import TodoListItem from './TodoListItem/TodoListItem'
 import PropTypes from "prop-types";
 
 
-const TodoList = ({todoList, onRemove}) => {
+const TodoList = ({todoList, onRemove, onToggleCompletedAt}) => {
   return (
       <ul>
         {todoList.map((item)=> (
-          <TodoListItem key={item.id} item={item} onRemove={onRemove}/>
+          console.log(item),
+          <TodoListItem key={item.id} style={{ textDecoration: item.completed ? 'line-through' : 'none' }} item={item} onRemove={onRemove} onToggleCompletedAt={onToggleCompletedAt}/>
         ))}
       </ul>
   )   

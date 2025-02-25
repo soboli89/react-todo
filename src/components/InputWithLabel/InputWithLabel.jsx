@@ -3,7 +3,7 @@ import Button from "../../Button";
 import styleInput from "./inputWithLabel.module.css"
 import PropTypes from "prop-types";
 
-function InputWithLabel ({id, onTitleChange, value, children }) {
+function InputWithLabel ({id, onTitleChange, value, completedAt, children }) {
     const inputRef = useRef();
     useEffect(()=> {
         inputRef.current.focus();
